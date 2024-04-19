@@ -23,7 +23,7 @@ async def create_item(item: Item):
     }
     if item.mode == ModelEnum.openai:
         url = 'https://api.openai.com/v1/chat/completions'
-        headers['Authorization'] = f'Bearer {os.environ['OPENAI_API_KEY']}'
+        headers['Authorization'] = f'Bearer {os.environ["OPENAI_API_KEY"]}'
     elif item.mode == ModelEnum.gorilla:
         url = 'http://34.132.127.197:8000/v1'
         headers['Authorization'] = 'Bearer EMPTY'

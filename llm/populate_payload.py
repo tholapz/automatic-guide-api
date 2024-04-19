@@ -20,7 +20,7 @@ Respond in JSON
 def populate_payload(item: Item):
     payload = { 'model': item.model }
 
-    html_form = requests.get(item.url).content
+    html_form = requests.get(item.url).text
 
     content = template.replace('[MESSAGE]', item.prompt).replace('[HTML_FORM]', html_form)
 

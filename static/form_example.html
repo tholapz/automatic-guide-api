@@ -1,74 +1,122 @@
 <!DOCTYPE html>
 <html>
-    <head></head>
-    <body>
-        <form action="#" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name"><br><br>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email"><br><br>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password"><br><br>
-            
-            <label for="age">Age:</label>
-            <input type="number" id="age" name="age"><br><br>
-            
-            <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone"><br><br>
-            
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address"><br><br>
-            
-            <label for="city">City:</label>
-            <input type="text" id="city" name="city"><br><br>
-            
-            <label for="country">Country:</label>
-            <input type="text" id="country" name="country"><br><br>
-            
-            <label for="zipcode">Zip Code:</label>
-            <input type="text" id="zipcode" name="zipcode"><br><br>
-            
-            <label for="gender">Gender:</label>
-            <select id="gender" name="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select><br><br>
-            
-            <label for="dob">Date of Birth:</label>
-            <input type="date" id="dob" name="dob"><br><br>
-            
-            <label for="occupation">Occupation:</label>
-            <input type="text" id="occupation" name="occupation"><br><br>
-            
-            <label for="education">Education:</label>
-            <input type="text" id="education" name="education"><br><br>
-            
-            <label for="interests">Interests:</label>
-            <input type="text" id="interests" name="interests"><br><br>
-            
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username"><br><br>
-            
-            <label for="website">Website:</label>
-            <input type="url" id="website" name="website"><br><br>
-            
-            <label for="bio">Bio:</label>
-            <textarea id="bio" name="bio"></textarea><br><br>
-            
-            <label for="favorite_color">Favorite Color:</label>
-            <input type="color" id="favorite_color" name="favorite_color"><br><br>
-            
-            <label for="subscribe">Subscribe to Newsletter:</label>
-            <input type="checkbox" id="subscribe" name="subscribe"><br><br>
-            
-            <label for="agree">Agree to Terms:</label>
-            <input type="checkbox" id="agree" name="agree"><br><br>
-            
-            <input type="submit" value="Submit">
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container col-6">
+        <form class="form" action="#" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div><br>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email">
+            </div><br>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password"
+                    autocomplete="current-password">
+            </div><br>
+
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" id="age" name="age">
+            </div><br>
+
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" class="form-control" id="phone" name="phone">
+            </div><br>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address" name="address">
+            </div><br>
+
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" class="form-control" id="city" name="city">
+            </div><br>
+
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" class="form-control" id="country" name="country">
+            </div><br>
+
+            <div class="form-group">
+                <label for="zipcode">Zip Code:</label>
+                <input type="text" class="form-control" id="zipcode" name="zipcode">
+            </div><br>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select class="form-control" id="gender" name="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div><br>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" class="form-control" id="dob" name="dob">
+            </div><br>
+
+            <div class="form-group">
+                <label for="occupation">Occupation:</label>
+                <input type="text" class="form-control" id="occupation" name="occupation">
+            </div><br>
+
+            <div class="form-group">
+                <label for="education">Education:</label>
+                <input type="text" class="form-control" id="education" name="education">
+            </div><br>
+
+            <div class="form-group">
+                <label for="interests">Interests:</label>
+                <input type="text" class="form-control" id="interests" name="interests">
+            </div><br>
+
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username">
+            </div><br>
+
+            <div class="form-group">
+                <label for="website">Website:</label>
+                <input type="url" class="form-control" id="website" name="website">
+            </div><br>
+
+            <div class="form-group">
+                <label for="bio">Bio:</label>
+                <textarea class="form-control" id="bio" name="bio"></textarea>
+            </div><br>
+
+            <div class="form-group">
+                <label for="favorite_color">Favorite Color:</label>
+                <input type="color" class="form-control" id="favorite_color" name="favorite_color">
+            </div><br>
+
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="subscribe" name="subscribe">
+                <label class="form-check-label" for="subscribe">Subscribe to Newsletter</label>
+            </div><br>
+
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="agree" name="agree">
+                <label class="form-check-label" for="agree">Agree to Terms</label>
+            </div><br>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        
-    </body>
+    </div>
+</body>
+
 </html>
