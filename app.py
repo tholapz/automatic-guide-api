@@ -1,12 +1,14 @@
+import time
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from Item import Item
 from ModelEnum import ModelEnum
-from llm import populate_payload
+from llm.populate_payload import templates, populate_payload
 import requests
 from typing import Dict
 import os
 from dotenv import load_dotenv, find_dotenv
+import json
 
 _ = load_dotenv(find_dotenv())
 
@@ -21,23 +23,29 @@ async def create_item(item: Item):
     headers = {
         'Content-Type': 'application/json'
     }
-    if item.mode == ModelEnum.openai:
+    if item.model == ModelEnum.openai:
         url = 'https://api.openai.com/v1/chat/completions'
         headers['Authorization'] = f'Bearer {os.environ["OPENAI_API_KEY"]}'
-    elif item.mode == ModelEnum.gorilla:
+    elif item.model == ModelEnum.gorilla:
         url = 'http://34.132.127.197:8000/v1'
         headers['Authorization'] = 'Bearer EMPTY'
     else:
         url = 'http://192.168.0.12:11434/api/generate'
     try:
-        response = requests.post(
+        html_form = requests.get(item.url).text
+        response1 = requests.post(
             url,
-            json = populate_payload(item),
+            json = populate_payload(item, templates[0].replace('[HTML_FORM]', html_form)),
             headers = headers
         )
-        return response.json()
+        json_object = response1.json()['response'].strip()
+        # otherwise, ollama will just crash... :p
+        time.sleep(5)
+        response = requests.post(
+            url,
+            json = populate_payload(item, templates[1].replace('[MESSAGE]', item.prompt).replace('[JSON_OBJECT]', json_object)),
+            headers = headers
+        )
+        return json.loads(response.json()['response'].strip())
     except Exception as e:
         return f'Error: {e}'
-    
-
-app.mount('/static', StaticFiles(directory='static'), name='static')
