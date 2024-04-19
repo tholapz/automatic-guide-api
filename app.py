@@ -1,39 +1,43 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
-from enum import Enum
-from llm.ollama import ollama
-from llm.gorilla import get_gorilla_response
+from Item import Item
+from ModelEnum import ModelEnum
+from llm import populate_payload
+import requests
+from typing import Dict
+import os
+from dotenv import load_dotenv, find_dotenv
 
-
-class ModeEnum(str, Enum):
-    openai='openai'
-    gorilla='gorilla'
-    mistral='mistral'
-    llama3='llama3'
-    mixtral='mixtral'
-    wizardlm2='wizardlm2'
-    drbx='drbx'
-    gemma='gemma'
-    llama2='llama2'
-
-class Item(BaseModel):
-    url: str
-    prompt: str
-    mode: ModeEnum = ModeEnum.openai
+_ = load_dotenv(find_dotenv())
 
 app = FastAPI()
 
-@app.get("/")
+@app.get('/')
 async def root():
-    return {"message": "Hello World"}
+    return {'message': 'Hello World'}
 
-@app.post("/items/")
+@app.post('/items/')
 async def create_item(item: Item):
-    # if item.mode == ModeEnum.openai:
-        # return openai(url=item.url, prompt=item.prompt)
-    # elif item.mode == ModeEnum.gorilla:
-        # return get_gorilla_response(url=item.url, prompt=item.prompt)
-    return ollama(url=item.url, userInput=item.prompt, model=item.mode)
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    if item.mode == ModelEnum.openai:
+        url = 'https://api.openai.com/v1/chat/completions'
+        headers['Authorization'] = f'Bearer {os.environ['OPENAI_API_KEY']}'
+    elif item.mode == ModelEnum.gorilla:
+        url = 'http://34.132.127.197:8000/v1'
+        headers['Authorization'] = 'Bearer EMPTY'
+    else:
+        url = 'http://192.168.0.12:11434/api/generate'
+    try:
+        response = requests.post(
+            url,
+            json = populate_payload(item),
+            headers = headers
+        )
+        return response.json()
+    except Exception as e:
+        return f'Error: {e}'
+    
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount('/static', StaticFiles(directory='static'), name='static')
