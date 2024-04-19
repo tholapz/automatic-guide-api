@@ -1,11 +1,9 @@
 import time
 from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
 from Item import Item
 from ModelEnum import ModelEnum
 from llm.populate_payload import templates, populate_payload
 import requests
-from typing import Dict
 import os
 from dotenv import load_dotenv, find_dotenv
 import json
@@ -27,10 +25,10 @@ async def create_item(item: Item):
         url = 'https://api.openai.com/v1/chat/completions'
         headers['Authorization'] = f'Bearer {os.environ["OPENAI_API_KEY"]}'
     elif item.model == ModelEnum.gorilla:
-        url = 'http://34.132.127.197:8000/v1'
+        url = f'http://{os.environ["GORILLA_HOST"]}:8000/v1'
         headers['Authorization'] = 'Bearer EMPTY'
     else:
-        url = 'http://192.168.0.12:11434/api/generate'
+        url = f'http://{os.environ["OLLAMA_HOST"]}:11434/api/generate'
     try:
         html_form = requests.get(item.url).text
         response1 = requests.post(
