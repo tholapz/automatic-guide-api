@@ -2,6 +2,7 @@ import time
 from fastapi import FastAPI
 from Item import Item
 from ModelEnum import ModelEnum
+from llm.invoke_openai import invoke_openai
 from llm.populate_payload import templates, populate_payload
 import requests
 import os
@@ -22,13 +23,20 @@ async def create_item(item: Item):
         'Content-Type': 'application/json'
     }
     if item.model == ModelEnum.openai:
-        url = 'https://api.openai.com/v1/chat/completions'
-        headers['Authorization'] = f'Bearer {os.environ["OPENAI_API_KEY"]}'
+        return invoke_openai(item)
     elif item.model == ModelEnum.gorilla:
         url = f'http://{os.environ["GORILLA_HOST"]}:8000/v1'
         headers['Authorization'] = 'Bearer EMPTY'
+        return invoke_gorilla(item, url, headers)
     else:
         url = f'http://{os.environ["OLLAMA_HOST"]}:11434/api/generate'
+        return invoke_ollama(item, url, headers)
+    
+def invoke_gorilla(item: Item, url, headers):
+    return
+
+  
+def invoke_ollama(item: Item, url, headers):
     try:
         html_form = requests.get(item.url).text
         response1 = requests.post(

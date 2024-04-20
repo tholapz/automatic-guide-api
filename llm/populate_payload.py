@@ -49,6 +49,17 @@ JSON Object:
 Criteria for Success:
 Ensure each fields are populated correctly
 Respond in JSON
+""",
+"""
+Message:
+[MESSAGE]
+
+HTML Form:
+[HTML_FORM]
+
+Criteria for Success:
+Ensure each fields are populated correctly
+Respond in JSON
 """
 ]
 

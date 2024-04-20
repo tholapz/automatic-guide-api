@@ -8,5 +8,5 @@ class ModelEnum(str, Enum):
     llama3='llama3'
     mistral='mistral'
     mixtral='mixtral'
-    openai='openai'
+    openai='gpt-3.5-turbo'
     wizardlm2='wizardlm2'
